@@ -1,22 +1,54 @@
-function validateLoginForm() {
-    var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    var passwordRegex = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,}$/;
-
-    var email = document.getElementById('email').value;
-    var password = document.getElementById('password').value;
-
-    if (!emailRegex.test(email)) {
-        alert('Ingresa un correo electrónico válido.');
-        return false;
+function openTab(tabName) {
+    var tabs = document.getElementsByClassName("tab-content");
+    for (var i = 0; i < tabs.length; i++) {
+        tabs[i].style.display = "none";
     }
 
-    if (!passwordRegex.test(password)) {
-        alert('La contraseña debe contener al menos 8 caracteres, incluyendo al menos un número y una letra.');
-        return false;
-    }
-
-    // Aquí puedes realizar una solicitud AJAX para enviar los datos al servidor si lo deseas
-
-    alert('Inicio de sesión exitoso!');
-    return true;
+    document.getElementById(tabName).style.display = "block";
 }
+
+function registerUser(event) {
+    event.preventDefault();
+
+    var form = document.getElementById("registerForm");
+    var formData = new FormData(form);
+
+    fetch('register.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert(data.message);
+        
+        if (data.message === 'Registro exitoso') {
+            // Limpiar el formulario después de un registro exitoso
+            form.reset();
+        }
+    })
+    .catch(error => console.error('Error al registrar:', error));
+}
+
+function loginUser(event) {
+    event.preventDefault();
+
+    var form = document.getElementById("loginForm");
+    var formData = new FormData(form);
+
+    fetch('login.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.message === 'Inicio de sesión exitoso') {
+            // Redirigir a otra página, mostrar mensaje, etc., según tu lógica de aplicación
+            alert('Inicio de sesión exitoso');
+        } else {
+            // Mostrar un mensaje de error específico
+            alert('Error al iniciar sesión: ' + data.message);
+        }
+    })
+    .catch(error => console.error('Error al iniciar sesión:', error));
+}
+
