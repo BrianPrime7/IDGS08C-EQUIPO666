@@ -38,7 +38,7 @@ if (!isset($_SESSION['userId'])) {
 
 		<div class="icons">
 			<a href="#" class="fas fa-heart"></a>
-			<a class="fas fa-shopping-cart" id="cart-bt"></a>
+			<a href="cart.php" class="fas fa-shopping-cart" id="cart-bt"></a>
             <form action="logout.php" method="post">
             <button type="submit" class="logout-button">Cerrar Sesión</button>
             </form>
