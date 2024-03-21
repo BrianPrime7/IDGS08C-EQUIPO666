@@ -42,7 +42,7 @@ if (!isset($_SESSION['userId'])) {
 
 		<div class="icons">
 			<a href="#" class="fas fa-heart"></a>
-			<a class="fas fa-shopping-cart" id="cart-bt"></a>
+			<a href="cart.php" class="fas fa-shopping-cart" id="cart-bt"></a>
             
 		</div>
 		<form action="logout.php" method="post">
@@ -279,6 +279,7 @@ if (!isset($_SESSION['userId'])) {
 	</div>
 	<div class="credit">Creada por <span>	Gabriela Sauceda</span></div>
 </section>
+<script src="script.js"></script>
 </body>
 </html>
 
