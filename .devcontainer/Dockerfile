@@ -1,27 +1,51 @@
 FROM debian:bullseye-slim
+
 ARG DEBIAN_FRONTEND=noninteractive
-USER root
+
+# Copiar el archivo php.ini al contenedor
 COPY php.ini /tmp
 
-RUN apt-get update -yq
-    # Add updated php sources
-RUN apt-get install curl -yq
-RUN curl -sSL https://packages.sury.org/php/README.txt | bash -x
-RUN apt-get update -yq
-    # Install some common packages
-RUN apt-get install git imagemagick nano openssh-server sqlite3 wget unzip -yq
-RUN sed -i 's/<policy domain="coder" rights="none" pattern="PDF" \/>/<policy domain="coder" rights="read|write" pattern="PDF" \/>/g' /etc/ImageMagick-6/policy.xml
-    # Install PHP CLI with some extensions for Drupal development
-RUN apt-get install php8.2-dev -yq
-RUN apt-get install php8.2-apcu php8.2-curl php8.2-gd php8.2-imagick php8.2-mbstring php8.2-sqlite3 php8.2-zip php8.2-intl -yq
-RUN apt-get update && \
-    apt-get install -yq php-pear
-RUN pear config-set php_ini /etc/php/8.2/cli/php.ini
-RUN pecl install xdebug
-RUN cat /tmp/php.ini >> /etc/php/8.2/cli/php.ini
-    # Install NodeJS LTS
-RUN curl -sL https://deb.nodesource.com/setup_lts.x | bash
-RUN apt-get install nodejs -yq
-    # Install Composer
-RUN wget https://getcomposer.org/installer
-RUN php installer --install-dir=/usr/local/bin --filename=composer
+# Actualizar el sistema y instalar paquetes necesarios
+RUN apt-get update -yq \
+    && apt-get install -yq \
+        curl \
+        git \
+        imagemagick \
+        nano \
+        openssh-server \
+        sqlite3 \
+        wget \
+        unzip \
+    && sed -i 's/<policy domain="coder" rights="none" pattern="PDF" \/>/<policy domain="coder" rights="read|write" pattern="PDF" \/>/g' /etc/ImageMagick-6/policy.xml \
+    # Agregar fuentes PHP actualizadas
+    && curl -sSL https://packages.sury.org/php/README.txt | bash -x \
+    # Instalar PHP CLI y extensiones
+    && apt-get install -yq \
+        php8.2-dev \
+        php8.2-apcu \
+        php8.2-curl \
+        php8.2-gd \
+        php8.2-imagick \
+        php8.2-mbstring \
+        php8.2-sqlite3 \
+        php8.2-zip \
+        php8.2-intl \
+        php-pear \
+    # Configurar PHP Pear
+    && pear config-set php_ini /etc/php/8.2/cli/php.ini \
+    # Instalar Xdebug
+    && pecl install xdebug \
+    # Agregar configuraciones personalizadas de php.ini
+    && cat /tmp/php.ini >> /etc/php/8.2/cli/php.ini \
+    # Instalar NodeJS LTS
+    && curl -sL https://deb.nodesource.com/setup_lts.x | bash \
+    && apt-get install -yq nodejs \
+    # Instalar Composer
+    && wget https://getcomposer.org/installer \
+    && php installer --install-dir=/usr/local/bin --filename=composer \
+    # Limpiar la caché de apt
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+# Definir el usuario de trabajo
+USER root
