@@ -1,16 +1,46 @@
 {
-  "name": "Dispets",
-  "extensions": ["ms-azuretools.vscode-docker"],
-  "settings": {
-    "php.validate.enable": true,
-    "php.validate.run": "onType",
-    "files.autoSave": "afterDelay",
-    "files.autoSaveDelay": 1000,
-    "terminal.integrated.defaultProfile.linux": "zsh"
-  },
-  "extensions": ["felixfbecker.php-intellisense"],
-  "remoteUser": "vscode",
-  "forwardPorts": [80, 443],
-  "runArgs": ["--user vscode"],
-  "extensions": ["felixfbecker.php-debug"]
+    "build": {
+        "dockerfile": "Dockerfile"
+    },
+    "extensions": [
+		"bmewburn.vscode-intelephense-client",
+		"coenraads.bracket-pair-colorizer",
+		"neilbrayfield.php-docblocker",
+		"editorconfig.editorconfig",
+		"esbenp.prettier-vscode",
+		"dbaeumer.vscode-eslint",
+		"ms-vsliveshare.vsliveshare"
+	],
+    "settings": {
+        "explorer.compactFolders": false,
+        "files.associations": {
+            "*.inc": "php",
+            "*.install": "php",
+            "*.module": "php",
+            "*.theme": "php",
+            "*.html": "twig"
+        },
+        "emmet.includeLanguages": {
+            "twig": "html"
+        },
+        "intelephense.completion.fullyQualifyGlobalConstantsAndFunctions": true,
+        "intelephense.format.braces": "k&r",
+        "intelephense.files.exclude": [
+            "**/.git/**",
+            "**/.svn/**",
+            "**/.hg/**",
+            "**/CVS/**",
+            "**/.DS_Store/**",
+            "**/node_modules/**",
+            "**/bower_components/**",
+            "**/vendor/**/{Tests,tests}/**",
+            "**/.history/**",
+            "**/vendor/**/vendor/**",
+            "**/*.api.php"
+        ],
+        "php.suggest.basic": false,
+        "php.validate.enable": false,
+        "php-docblocker.returnGap": true,
+        "php-docblocker.useShortNames": true
+    }
 }
