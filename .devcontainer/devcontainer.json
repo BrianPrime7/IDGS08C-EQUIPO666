@@ -1,0 +1,16 @@
+{
+  "name": "Dispets",
+  "extensions": ["ms-azuretools.vscode-docker"],
+  "settings": {
+    "php.validate.enable": true,
+    "php.validate.run": "onType",
+    "files.autoSave": "afterDelay",
+    "files.autoSaveDelay": 1000,
+    "terminal.integrated.defaultProfile.linux": "zsh"
+  },
+  "extensions": ["felixfbecker.php-intellisense"],
+  "remoteUser": "vscode",
+  "forwardPorts": [80, 443],
+  "runArgs": ["--user vscode"],
+  "extensions": ["felixfbecker.php-debug"]
+}
