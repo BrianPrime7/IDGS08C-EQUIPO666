@@ -15,8 +15,8 @@ RUN sed -i 's/<policy domain="coder" rights="none" pattern="PDF" \/>/<policy dom
 RUN apt-get install php8.2-dev -yq
 RUN apt-get install php8.2-apcu php8.2-curl php8.2-gd php8.2-imagick php8.2-mbstring php8.2-sqlite3 php8.2-zip php8.2-intl -yq
 RUN apt-get update && \
-    apt-get install -yq php-pear && \
-    pear config-set php_ini /etc/php/8.2/cli/php.ini
+    apt-get install -yq php-pear
+RUN pear config-set php_ini /etc/php/8.2/cli/php.ini
 RUN pecl install xdebug
 RUN cat /tmp/php.ini >> /etc/php/8.2/cli/php.ini
     # Install NodeJS LTS
