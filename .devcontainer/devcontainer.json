@@ -1,54 +1,37 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/php-mariadb
 {
-    "build": {
-        "dockerfile": "Dockerfile"
-    },
-    "customizations": {
-        "vscode": {
-            "extensions": [
-                "bmewburn.vscode-intelephense-client",
-                "coenraads.bracket-pair-colorizer",
-                "neilbrayfield.php-docblocker",
-                "editorconfig.editorconfig",
-                "esbenp.prettier-vscode",
-                "dbaeumer.vscode-eslint",
-                "ms-vsliveshare.vsliveshare"
-            ],
-            "settings": {
-                "explorer.compactFolders": false,
-                "files.associations": {
-                    "*.inc": "php",
-                    "*.install": "php",
-                    "*.module": "php",
-                    "*.theme": "php",
-                    "*.html": "twig"
-                },
-                "emmet.includeLanguages": {
-                    "twig": "html"
-                },
-                "intelephense.completion.fullyQualifyGlobalConstantsAndFunctions": true,
-                "intelephense.format.braces": "k&r",
-                "intelephense.files.exclude": [
-                    "**/.git/**",
-                    "**/.svn/**",
-                    "**/.hg/**",
-                    "**/CVS/**",
-                    "**/.DS_Store/**",
-                    "**/node_modules/**",
-                    "**/bower_components/**",
-                    "**/vendor/**/{Tests,tests}/**",
-                    "**/.history/**",
-                    "**/vendor/**/vendor/**",
-                    "**/*.api.php"
-                ],
-                "php.suggest.basic": false,
-                "php.validate.enable": false,
-                "php-docblocker.returnGap": true,
-                "php-docblocker.useShortNames": true
-            }
-        }
-    },
-    "features": {
-        "ghcr.io/devcontainers/features/php:1": {},
-        "ghcr.io/shyim/devcontainers-features/php:0": {}
-    }
+	"name": "PHP & MariaDB",
+	"dockerComposeFile": "docker-compose.yml",
+	"service": "app",
+	"workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+
+	// Features to add to the dev container. More info: https://containers.dev/features.
+	// "features": {},
+
+	// For use with PHP or Apache (e.g.php -S localhost:8080 or apache2ctl start)
+	"forwardPorts": [
+		8080,
+		3306
+	],
+	"features": {
+		"ghcr.io/devcontainers/features/sshd:1": {},
+		"ghcr.io/devcontainers/features/github-cli:1": {}
+	},
+
+	// Use 'postCreateCommand' to run commands after the container is created.
+	"postCreateCommand": "sudo chmod a+x \"$(pwd)\" && sudo rm -rf /var/www/html && sudo ln -s \"$(pwd)\" /var/www/html; if [ -f composer.json ];then composer install;fi",
+
+	// Configure tool-specific properties.
+	"customizations": {
+		// Configure properties specific to VS Code.
+		"vscode": {
+			"extensions": [
+				"ikappas.composer"
+			]
+		}
+	}
+
+	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+	// "remoteUser": "root"
 }
