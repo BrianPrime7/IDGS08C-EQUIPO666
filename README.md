@@ -8,5 +8,5 @@ Se abre el puerto asignado y reedirecciona al formulario del registro de usuario
 
 Al registrarse, los datos se guardan en la base de datos
 
-
+D
 
