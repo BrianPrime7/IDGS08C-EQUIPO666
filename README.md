@@ -6,7 +6,5 @@ Dentro de la terminal se ingresa el comando "apache2ctl start" para activar el p
 
 Se abre el puerto asignado y reedirecciona al formulario del registro de usuario
 
-Al registrarse, los datos se guardan en la base de datos
-
-D
+Al registrarse, los datos se guardan en la base de datos.
 
