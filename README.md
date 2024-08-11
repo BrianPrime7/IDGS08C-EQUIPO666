@@ -1,5 +1,5 @@
 # IDGS08C-EQUIPO666
-
+SELECT * FROM usuarios
 Instrucciones para poder registrar un usuario:
 
 Dentro de la terminal se ingresa el comando "apache2ctl start" para activar el puerto
